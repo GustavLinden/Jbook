@@ -5,13 +5,13 @@ import { Cell } from '../state';
 import { useActions } from '../hooks/use-actions';
 
 interface TextEditorProps {
-  cell: Cell
+  cell: Cell;
 }
 
-const TextEditor: React.FC<TextEditorProps> = ({cell}) => {
+const TextEditor: React.FC<TextEditorProps> = ({ cell }) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const [editing, setEditing] = useState(false);
-  const  { updateCell } = useActions();
+  const { updateCell } = useActions();
 
   useEffect(() => {
     const listener = (event: MouseEvent) => {
@@ -22,6 +22,7 @@ const TextEditor: React.FC<TextEditorProps> = ({cell}) => {
       ) {
         return;
       }
+
       setEditing(false);
     };
     document.addEventListener('click', listener, { capture: true });
@@ -34,7 +35,10 @@ const TextEditor: React.FC<TextEditorProps> = ({cell}) => {
   if (editing) {
     return (
       <div className="text-editor" ref={ref}>
-        <MDEditor value={cell.content} onChange={(v) => updateCell(cell.id, v || '')} />
+        <MDEditor
+          value={cell.content}
+          onChange={(v) => updateCell(cell.id, v || '')}
+        />
       </div>
     );
   }
@@ -42,7 +46,7 @@ const TextEditor: React.FC<TextEditorProps> = ({cell}) => {
   return (
     <div className="text-editor card" onClick={() => setEditing(true)}>
       <div className="card-content">
-      <MDEditor.Markdown source={cell.content || 'Click to edit!'} />
+        <MDEditor.Markdown source={cell.content || 'Click to edit'} />
       </div>
     </div>
   );
