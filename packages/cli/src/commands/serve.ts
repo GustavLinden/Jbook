@@ -1,6 +1,6 @@
 import path from 'path';
 import { Command } from 'commander';
-import { serve } from '@gnotebook/local-api';
+import { serve } from '@glnotebook/local-api';
 
 const isProduction = process.env.NODE_ENV === 'production';
 
